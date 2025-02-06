@@ -1,5 +1,9 @@
 html,
 body {
+  height: 100vh;
+}
+
+#content {
   height: 100%;
 }
 
@@ -24,4 +28,22 @@ legend:before {
 .checkbox-warning.form-check-input:checked {
   background-color: #ffc107;
   border-color: #ffc107;
+}
+
+#logo {
+  width: 600px;
+}
+
+@media screen and (max-width:500px) {
+  #content {
+    height: auto;
+  }
+
+  #logo {
+    width: 100%;
+  }
+
+  footer {
+    position: unset;
+  }
 }

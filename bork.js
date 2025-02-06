@@ -12,7 +12,7 @@ jQuery(function () {
   if (localStorage.getItem("hours_per_day")) $('#hours_per_day').val(localStorage.getItem("hours_per_day"));
   if (localStorage.getItem("skip_filler")) $('#skip_filler').prop("checked", localStorage.getItem("skip_filler") == "checked" ? true : false);
   if (localStorage.getItem("skip_op_ed")) $('#skip_op_ed').prop("checked", localStorage.getItem("skip_op_ed") == "checked" ? true : false);
-  
+
   var current_episode = $('#current_ep').val();
   var episodes_count = $('#total_ep').val();
   var hours_per_day = $('#hours_per_day').val();
@@ -26,18 +26,26 @@ jQuery(function () {
   })
 
   $('#current_ep').on('change', function () {
-    current_episode = $('#current_ep').val();
-    localStorage.setItem("current_episode", current_episode);
+    if (/^\d+$/.test($('#current_ep').val())) {
+      current_episode = $('#current_ep').val();
+      localStorage.setItem("current_episode", current_episode);
+    }
   })
 
   $('#total_ep').on('change', function () {
-    episodes_count = $('#total_ep').val();
-    localStorage.setItem("episodes_count", episodes_count);
+    if (/^\d+$/.test($('#total_ep').val())) {
+      if (episodes_count > current_episode) {
+        episodes_count = $('#total_ep').val();
+        localStorage.setItem("episodes_count", episodes_count);
+      }
+    }
   })
 
   $('#hours_per_day').on('change', function () {
-    hours_per_day = $('#hours_per_day').val();
-    localStorage.setItem("hours_per_day", hours_per_day);
+    if (/^\d+$/.test($('#hours_per_day').val())) {
+      hours_per_day = $('#hours_per_day').val();
+      localStorage.setItem("hours_per_day", hours_per_day);
+    }
   })
 
   $('#skip_filler').on('change', function () {
@@ -51,6 +59,12 @@ jQuery(function () {
   })
 
   function calculate() {
+
+    if (!current_episode) return
+    if (!episodes_count) return
+    if (!hours_per_day) return
+    if (episodes_count < current_episode) return
+
     episodes_left = episodes_count - current_episode;
 
     if (skip_filler) {
