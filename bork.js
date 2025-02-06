@@ -78,7 +78,11 @@ jQuery(function () {
     days_left = hours_left % hours_per_day > 0 ? Math.floor(hours_left / hours_per_day) + 1 : Math.floor(hours_left / hours_per_day);
 
     $('#ep_left').text(episodes_left);
-    $('#time_left').text(hours_left + " hours and " + minutes_left + " minutes");
+    if (hours_left === 1) {
+      $('#time_left').text(hours_left + " hour and " + minutes_left + " minutes");
+    } else {
+      $('#time_left').text(hours_left + " hours and " + minutes_left + " minutes");
+    }
     $('#days_left').text(days_left);
   }
 
