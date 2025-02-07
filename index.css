@@ -1,6 +1,6 @@
 html,
 body {
-  height: 100vh;
+  height: 100%;
 }
 
 #content {
@@ -8,8 +8,8 @@ body {
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
+  /* position: fixed;
+  bottom: 0; */
   width: 100%;
 }
 
@@ -34,7 +34,7 @@ legend:before {
   width: 600px;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:600px) {
   #content {
     height: auto;
   }
